@@ -1,4 +1,4 @@
-# SSH Forwarding README
+# VSCOde extension for SSH Forwarding
 
 **SSH Local Forwarding: Secure and Efficient Tunneling**
 
