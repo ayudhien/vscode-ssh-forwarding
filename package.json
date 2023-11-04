@@ -123,7 +123,7 @@
                   "type": "object",
                   "description": "local bind address and port",
                   "properties": {
-                    "address": {
+                    "host": {
                       "type": "string",
                       "default": "localhost",
                       "description": "local bind address"
@@ -139,7 +139,7 @@
                   "type": "object",
                   "description": "remote host address and port",
                   "properties": {
-                    "address": {
+                    "host": {
                       "type": "string",
                       "default": "localhost",
                       "description": "remote host bind address"
@@ -166,14 +166,14 @@
               "host": "yoursshserver",
               "port": 22,
               "localbind": {
-                "address": "localhost",
+                "host": "localhost",
                 "port": 27017
               },
               "remotebind": {
-                "address": "localhost",
+                "host": "localhost",
                 "port": 27017
               },
-              "keyfile": "~/.ssh/id_rsa"
+              "keyfile": "/full/path/id_rsa"
             }
           ]
         },
@@ -209,7 +209,7 @@
                   "type": "object",
                   "description": "local bind address and port",
                   "properties": {
-                    "address": {
+                    "host": {
                       "type": "string",
                       "default": "localhost",
                       "description": "local bind address"
@@ -236,10 +236,10 @@
               "host": "yoursshserver",
               "port": 22,
               "localbind": {
-                "address": "localhost",
+                "host": "localhost",
                 "port": 8080
               },
-              "keyfile": "~/.ssh/id_rsa"
+              "keyfile": "/full/path/id_rsa"
             }
           ]
         }

@@ -1,4 +1,4 @@
-# VSCOde extension for SSH Forwarding
+# VScode extension for SSH Forwarding
 
 **SSH Local Forwarding: Secure and Efficient Tunneling**
 
@@ -22,14 +22,14 @@ SSH Local Forwarding is a robust networking technique that empowers you to estab
         "host": "localhost",
         "port": 22,
         "localbind": {
-            "address": "localhost",
+            "host": "localhost",
             "port": 27017
         },
         "remotebind": {
-            "address": "localhost",
+            "host": "localhost",
             "port": 27017
         },
-        "keyfile": "~/.ssh/id_rsa"
+        "keyfile": "/full/path/id_rsa"
     }
 ]
 ```
@@ -52,10 +52,10 @@ SSH Local Forwarding is a robust networking technique that empowers you to estab
         "host": "localhost",
         "port": 22,
         "localbind": {
-            "address": "localhost",
+            "host": "localhost",
             "port": 8080
         },
-        "keyfile": "~/.ssh/id_rsa"
+        "keyfile": "/full/path/id_rsa"
     }
 ]
 ```
@@ -64,7 +64,7 @@ SSH Local Forwarding is a robust networking technique that empowers you to estab
 - **user**: The SSH username for the remote server.
 - **host**: The hostname or IP address of the remote server.
 - **port**: The SSH port on the remote server (usually 22).
-- **localbind**: Local address and port for binding.
+- **localbind**: Local host and port for binding.
 - **keyfile**: The path to your SSH key file.
 
 ## Getting Started
