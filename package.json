@@ -1,0 +1,275 @@
+{
+  "name": "ssh-forwarding",
+  "displayName": "SSH Forwarding",
+  "description": "SSH Local Forwarding is a secure networking technique that allows you to create a tunnel from your local machine to a remote server through SSH (Secure Shell). This tunneling mechanism enables you to securely access services and resources on the remote server as if they were on your local system. It's a powerful tool for enhancing security and facilitating remote access to applications like web servers or databases, providing a safeguarded and encrypted connection for data transmission. SSH Local Forwarding is a fundamental feature of SSH, invaluable for network administrators, developers, and anyone needing to establish secure connections between local and remote systems.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/ayudhien/vscode-ssh-forwarding.git"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ssh-forwarding",
+          "title": "SSH Tunnel - Local Forwarding",
+          "icon": "resources/routing.svg"
+        }
+      ]
+    },
+    "views": {
+      "ssh-forwarding": [
+        {
+          "id": "sshForwarding",
+          "name": "Local Forwarding",
+          "contextualTitle": "Local Forwarding"
+        },
+        {
+          "id": "sshSocksProxy",
+          "name": "Socks Proxy",
+          "contextualTitle": "Socks Proxy"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "sshForwarding.refreshEntry",
+        "title": "SSH Local Forwarding: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "sshForwarding.connectionAction",
+        "title": "SSH Local Forwarding: Connect/Disconnect Entry",
+        "icon": "$(debug-disconnect)"
+      },
+      {
+        "command": "sshSocksProxy.refreshEntry",
+        "title": "SSH Socks Proxy: Refresh Entry",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "sshSocksProxy.connectionAction",
+        "title": "SSH Socks Proxy: Connect/Disconnect Entry",
+        "icon": "$(debug-disconnect)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "sshForwarding.refreshEntry",
+          "when": "view == sshForwarding",
+          "group": "navigation"
+        },
+        {
+          "command": "sshSocksProxy.refreshEntry",
+          "when": "view == sshSocksProxy",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "sshForwarding.connectionAction",
+          "when": "view == sshForwarding && viewItem == sshForwardingItem",
+          "group": "inline"
+        },
+        {
+          "command": "sshSocksProxy.connectionAction",
+          "when": "view == sshSocksProxy && viewItem == socksProxyItem",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "SSHForwarding",
+      "properties": {
+        "sshforwarding.connection": {
+          "type": "array",
+          "description": "The connection information required to create a tunnel.",
+          "properties": {
+            "items": {
+              "type": "object",
+              "description": "connection information",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "con1",
+                  "description": "the name of connection"
+                },
+                "user": {
+                  "type": "string",
+                  "default": "root",
+                  "description": "username"
+                },
+                "host": {
+                  "type": "string",
+                  "default": "localhost",
+                  "description": "host name for this connection"
+                },
+                "port": {
+                  "type": "int",
+                  "default": 22,
+                  "description": "connection port"
+                },
+                "localbind": {
+                  "type": "object",
+                  "description": "local bind address and port",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "default": "localhost",
+                      "description": "local bind address"
+                    },
+                    "port": {
+                      "type": "int",
+                      "default": 8080,
+                      "description": "local bind port"
+                    }
+                  }
+                },
+                "remotebind": {
+                  "type": "object",
+                  "description": "remote host address and port",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "default": "localhost",
+                      "description": "remote host bind address"
+                    },
+                    "port": {
+                      "type": "int",
+                      "default": 8080,
+                      "description": "remote host bind port"
+                    }
+                  }
+                },
+                "keyfile": {
+                  "type": "string",
+                  "default": "/.ssh/id_rsa",
+                  "description": "require private key file for ssh login user"
+                }
+              }
+            }
+          },
+          "default": [
+            {
+              "name": "mongodb",
+              "user": "root",
+              "host": "yoursshserver",
+              "port": 22,
+              "localbind": {
+                "address": "localhost",
+                "port": 27017
+              },
+              "remotebind": {
+                "address": "localhost",
+                "port": 27017
+              },
+              "keyfile": "~/.ssh/id_rsa"
+            }
+          ]
+        },
+        "sshsocksproxy.connection": {
+          "type": "array",
+          "description": "The connection information required to create a socks proxy.",
+          "properties": {
+            "items": {
+              "type": "object",
+              "description": "connection information",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "con1",
+                  "description": "the name of connection"
+                },
+                "user": {
+                  "type": "string",
+                  "default": "root",
+                  "description": "username"
+                },
+                "host": {
+                  "type": "string",
+                  "default": "localhost",
+                  "description": "host name for this connection"
+                },
+                "port": {
+                  "type": "int",
+                  "default": 22,
+                  "description": "connection port"
+                },
+                "localbind": {
+                  "type": "object",
+                  "description": "local bind address and port",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "default": "localhost",
+                      "description": "local bind address"
+                    },
+                    "port": {
+                      "type": "int",
+                      "default": 8080,
+                      "description": "local bind port"
+                    }
+                  }
+                },
+                "keyfile": {
+                  "type": "string",
+                  "default": "/.ssh/id_rsa",
+                  "description": "require private key file for ssh login user"
+                }
+              }
+            }
+          },
+          "default": [
+            {
+              "name": "Socksv5 Proxy",
+              "user": "root",
+              "host": "yoursshserver",
+              "port": 22,
+              "localbind": {
+                "address": "localhost",
+                "port": 8080
+              },
+              "keyfile": "~/.ssh/id_rsa"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@types/ssh2": "^1.11.15",
+    "@types/vscode": "^1.84.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "socksv5": "^0.0.6",
+    "ssh2": "^1.14.0",
+    "tunnel-ssh": "^5.1.1"
+  }
+}
